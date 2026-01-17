@@ -1,7 +1,11 @@
 import { Box } from "@mui/material";
 import { useState } from "react";
 
-const DisplayByRadio = () => {
+interface DisplayByRadioProps {
+    radioGroupName?: string;
+}
+
+const DisplayByRadio = ({ radioGroupName }: DisplayByRadioProps) => {
     const [radioValue] = useState("不明");
 
     return (
