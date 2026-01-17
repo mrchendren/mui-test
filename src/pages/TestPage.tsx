@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Box, FormControl, FormControlLabel, Radio, RadioGroup, Typography } from "@mui/material";
-import { AutoCompleteTest } from "./AutoCompleteTest";
-import { DateBoxTest } from "./DateBoxTest";
-import { CustomBoxTest } from "./CustomBoxTest";
-import { DataGridTest } from "./DataGridTest";
+import { AutoCompleteTest } from "./testpages/AutoCompleteTest";
+import { DateBoxTest } from "./testpages/DateBoxTest";
+import { CustomBoxTest } from "./testpages/CustomBoxTest";
+import { DataGridTest } from "./testpages/DataGridTest";
+import SpinnerTest from "./testpages/SpinnerTest";
 
-type TestComponent = "autocomplete" | "datebox" | "custombox" | "datagrid";
+type TestComponent = "autocomplete" | "datebox" | "custombox" | "datagrid" | "spinner";
 
 export const TestPage = () => {
   const [selectedTest, setSelectedTest] = useState<TestComponent>("autocomplete");
@@ -24,6 +25,8 @@ export const TestPage = () => {
         return <CustomBoxTest />;
       case "datagrid":
         return <DataGridTest />;
+      case "spinner":
+        return <SpinnerTest />;
       default:
         return <AutoCompleteTest />;
     }
@@ -61,6 +64,11 @@ export const TestPage = () => {
             value="datagrid"
             control={<Radio />}
             label="DataGrid"
+          />
+          <FormControlLabel
+            value="spinner"
+            control={<Radio />}
+            label="Spinner"
           />
         </RadioGroup>
       </FormControl>

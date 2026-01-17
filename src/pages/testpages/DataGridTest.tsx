@@ -225,6 +225,9 @@ export const DataGridTest = () => {
                             // "hidden" : 強制的に非表示（はみ出した部分は見えなくなる）
                             // overflowY: "scroll", // 縦スクロールバーを常に表示
                             // overflowX: "hidden", // 横スクロールバーを強制非表示
+                            position: 'absolute',
+                            top: '40px',
+                            left: 40,
                         }}
                     />
                 </Box>
