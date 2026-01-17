@@ -24,7 +24,11 @@ const DisplayByRadio = ({ radioGroupName }: DisplayByRadioProps) => {
             `input[name="${radioGroupName}"]`
         );
 
-        // 初期値設定（lint回避のためコールバック内で実行）
+        // 初期値設定
+        // useEffect内で同期的にsetStateを呼ぶとlintエラーになるため、setTimeoutでラップしている。
+        // 改善案として「初期値取得を行わず、イベント監視のみにする」設計を検討したが、
+        // ラジオボタンにdefaultValueがある場合、マウント時点で既に選択されている値を
+        // 取得できず状態のズレが生じるため却下。
         setTimeout(() => setRadioValue(getSelectedValue()), 0);
 
         // 変更監視
