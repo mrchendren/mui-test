@@ -7,7 +7,7 @@ const SwitchCheckPage = () => {
         <Box>
             <h5>switch page test</h5>
             <RadioSet />
-            <DisplayByRadio />
+            <DisplayByRadio radioGroupName="radio-set" />
         </Box>
     );
 };
