@@ -1,10 +1,16 @@
 import { Box, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 
-const RadioSet = () => {
+interface RadioSetProps {
+    radioGroupName?: string;
+    defaultValue?: string;
+}
+
+const RadioSet = ({ radioGroupName = "radio-set", defaultValue }: RadioSetProps) => {
     return (
         <Box>
             <RadioGroup
-                name="radio-set"
+                name={radioGroupName}
+                defaultValue={defaultValue}
                 row
             >
                 <FormControlLabel

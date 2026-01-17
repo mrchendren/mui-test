@@ -6,7 +6,7 @@ const SwitchCheckPage = () => {
     return (
         <Box>
             <h5>switch page test</h5>
-            <RadioSet />
+            <RadioSet radioGroupName="radio-set" defaultValue="1" />
             <DisplayByRadio radioGroupName="radio-set" />
         </Box>
     );
