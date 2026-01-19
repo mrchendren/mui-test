@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import RadioSet from "./switchcheckpages/RadioSet";
 import DisplayByRadio from "./switchcheckpages/DisplayByRadio";
+import DisplayByRadioSwitch from "./switchcheckpages/DisplayByRadioSwitch";
 
 /**
  * プッシュ型実装の試行とその困難さについて
@@ -50,20 +51,27 @@ const SwitchCheckPage = () => {
             <h5>switch page test</h5>
 
             <Box>
-                <h6>【プル型】DisplayByRadioがDOMから値を取得</h6>
-                <RadioSet radioGroupName="radio-set" defaultValue="1" />
-                <DisplayByRadio radioGroupName="radio-set" switchContentId="1">
+                <h6>【DisplayByRadio】コンポーネントを複数配置し、それぞれにswitchContentIdを指定</h6>
+                <RadioSet radioGroupName="radio-set-1" defaultValue="1" />
+                <DisplayByRadio radioGroupName="radio-set-1" switchContentId="1">
                     <div>ここはラジオボタンの値が1のときに表示されます</div>
                 </DisplayByRadio>
-                <DisplayByRadio radioGroupName="radio-set" switchContentId="2">
+                <DisplayByRadio radioGroupName="radio-set-1" switchContentId="2">
                     <div>ここはラジオボタンの値が2のときに表示されます</div>
                 </DisplayByRadio>
-                <DisplayByRadio radioGroupName="radio-set" switchContentId="3">
+                <DisplayByRadio radioGroupName="radio-set-1" switchContentId="3">
                     <div>ここはラジオボタンの値が3のときに表示されます</div>
                 </DisplayByRadio>
-                <DisplayByRadio radioGroupName="radio-set" switchContentId="unknown">
-                    <div>ここはラジオボタンの値が不明のときに表示されます</div>
-                </DisplayByRadio>
+            </Box>
+
+            <Box>
+                <h6>【DisplayByRadioSwitch】1つのコンポーネント内で複数の子要素を出し分け</h6>
+                <RadioSet radioGroupName="radio-set-2" defaultValue="1" />
+                <DisplayByRadioSwitch radioGroupName="radio-set-2">
+                    <div data-switch-content-id="1">ここはラジオボタンの値が1のときに表示されます</div>
+                    <div data-switch-content-id="2">ここはラジオボタンの値が2のときに表示されます</div>
+                    <div data-switch-content-id="4">ここはラジオボタンの値が3のときに表示されます</div>
+                </DisplayByRadioSwitch>
             </Box>
         </Box>
     );
