@@ -3,10 +3,12 @@ import { useState, useEffect } from "react";
 
 interface DisplayByRadioProps {
     radioGroupName?: string;
+    switchContentId?: string;
+    children?: React.ReactNode;
 }
 
-const DisplayByRadio = ({ radioGroupName }: DisplayByRadioProps) => {
-    const [radioValue, setRadioValue] = useState("不明");
+const DisplayByRadio = ({ radioGroupName, switchContentId, children }: DisplayByRadioProps) => {
+    const [radioValue, setRadioValue] = useState<string | null>(null);
 
     useEffect(() => {
         if (!radioGroupName) return;
@@ -15,7 +17,7 @@ const DisplayByRadio = ({ radioGroupName }: DisplayByRadioProps) => {
             const selected = document.querySelector<HTMLInputElement>(
                 `input[name="${radioGroupName}"]:checked`
             );
-            return selected?.value ?? "不明";
+            return selected?.value ?? null;
         };
 
         const handleChange = () => setRadioValue(getSelectedValue());
@@ -43,6 +45,7 @@ const DisplayByRadio = ({ radioGroupName }: DisplayByRadioProps) => {
         <Box sx={{ border: "1px solid black" }}>
             <div>ここはラジオボタンの値を表示します</div>
             <div>ラジオボタンの値：{radioValue}</div>
+            {switchContentId === radioValue && <div>{children}</div>}
         </Box>
     );
 };
