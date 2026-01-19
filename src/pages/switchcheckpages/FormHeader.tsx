@@ -251,6 +251,7 @@ const FormHeader: React.FC<FormHeaderProps> = ({
                                     label={`Group: ${hiddenName}`}
                                     sx={{ mb: 0.5, fontSize: 11 }}
                                 />
+                                {/* MUI RadioGroup版（コメントアウト）
                                 <RadioGroup
                                     name={hiddenName}
                                     value={current}
@@ -283,7 +284,8 @@ const FormHeader: React.FC<FormHeaderProps> = ({
                                         />
                                     ))}
                                 </RadioGroup>
-                                {/* HTML標準ラジオボタン版（コメントアウト）
+                                */}
+                                {/* HTML標準ラジオボタン版 */}
                                 <Box
                                     sx={{
                                         display: 'flex',
@@ -310,14 +312,6 @@ const FormHeader: React.FC<FormHeaderProps> = ({
                                                 name={hiddenName}
                                                 value={sid}
                                                 defaultChecked={sid === current}
-                                                onChange={(e) => {
-                                                    if (e.target.checked) {
-                                                        setHiddenGroupValues((prev) => ({
-                                                            ...prev,
-                                                            [target]: sid,
-                                                        }));
-                                                    }
-                                                }}
                                                 style={{
                                                     cursor: 'pointer',
                                                 }}
@@ -326,7 +320,6 @@ const FormHeader: React.FC<FormHeaderProps> = ({
                                         </label>
                                     ))}
                                 </Box>
-                                */}
                             </Box>
                         );
                     })}
