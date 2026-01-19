@@ -40,22 +40,24 @@ const DisplayByRadioSwitch = ({ radioGroupName, children }: DisplayByRadioSwitch
         };
     }, [radioGroupName]);
 
-    // childrenをフィルタリングして、ラジオボタンの値と一致する子要素のみを表示
-    const filteredChildren = Children.map(children, (child) => {
-        if (!isValidElement(child)) return null;
-
-        const switchContentId = (child.props as { "data-switch-content-id"?: string })["data-switch-content-id"];
-        if (switchContentId === switchValue) {
-            return child;
+    // childrenをフィルタリングして、ラジオボタンの値と一致する子要素のみを抽出
+    // 一致するものがなければ全ての子要素を表示
+    const matchingChildren: ReactNode[] = [];
+    Children.forEach(children, (child) => {
+        if (isValidElement(child)) {
+            const switchContentId = (child.props as { "data-switch-content-id"?: string })["data-switch-content-id"];
+            if (switchContentId === switchValue) {
+                matchingChildren.push(child);
+            }
         }
-        return null;
     });
+    const displayChildren = matchingChildren.length > 0 ? matchingChildren : children;
 
     return (
         <Box sx={{ border: "1px solid black" }}>
             <div>ここはラジオボタンの値を表示します</div>
             <div>ラジオボタンの値：{switchValue}</div>
-            {filteredChildren}
+            {displayChildren}
         </Box>
     );
 };
