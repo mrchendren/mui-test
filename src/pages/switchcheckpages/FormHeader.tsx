@@ -109,6 +109,24 @@ const FormHeader: React.FC<FormHeaderProps> = ({
         }
     };
 
+    // hiddenGroupValuesが変更されたとき、対応するinput要素にchangeイベントを発火
+    // これにより、DisplayByRadioSwitchがDOMのchangeイベントを検出して値を更新できる
+    useEffect(() => {
+        for (const target of Object.keys(hiddenGroupValues)) {
+            const groupName = `${target}_${dispid}`;
+            const value = hiddenGroupValues[target];
+
+            // 対象のinput要素を取得してchangeイベントを発火
+            const input = document.querySelector<HTMLInputElement>(
+                `input[name="${groupName}"][value="${value}"]`
+            );
+            if (input) {
+                input.checked = true;
+                input.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+        }
+    }, [dispid, hiddenGroupValues]);
+
     // ログ：見えないラジオグループの名称・候補 value・現在値（functions は不変前提）
     useEffect(() => {
         console.groupCollapsed('[FormHeader] Invisible Radio Groups Snapshot');
@@ -265,6 +283,50 @@ const FormHeader: React.FC<FormHeaderProps> = ({
                                         />
                                     ))}
                                 </RadioGroup>
+                                {/* HTML標準ラジオボタン版（コメントアウト）
+                                <Box
+                                    sx={{
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        flexWrap: 'wrap',
+                                        gap: 1,
+                                    }}
+                                >
+                                    {switchIds.map((sid) => (
+                                        <label
+                                            key={sid}
+                                            style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: '4px',
+                                                cursor: 'pointer',
+                                                fontSize: '12px',
+                                                color: '#1976d2',
+                                            }}
+                                        >
+                                            <input
+                                                type="radio"
+                                                name={hiddenName}
+                                                value={sid}
+                                                defaultChecked={sid === current}
+                                                onChange={(e) => {
+                                                    if (e.target.checked) {
+                                                        setHiddenGroupValues((prev) => ({
+                                                            ...prev,
+                                                            [target]: sid,
+                                                        }));
+                                                    }
+                                                }}
+                                                style={{
+                                                    cursor: 'pointer',
+                                                }}
+                                            />
+                                            <span>{sid}</span>
+                                        </label>
+                                    ))}
+                                </Box>
+                                */}
                             </Box>
                         );
                     })}

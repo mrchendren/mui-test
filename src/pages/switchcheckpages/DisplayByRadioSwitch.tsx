@@ -32,7 +32,7 @@ const DisplayByRadioSwitch = ({ radioGroupName, children }: DisplayByRadioSwitch
         // 取得できず状態のズレが生じるため却下。
         setTimeout(() => setSwitchValue(getSelectedValue()), 0);
 
-        // 変更監視
+        // 変更監視（DOMのネイティブchangeイベントのみ）
         radioButtons.forEach((r) => r.addEventListener("change", handleChange));
 
         return () => {
