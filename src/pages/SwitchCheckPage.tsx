@@ -1,7 +1,8 @@
 import { Box } from "@mui/material";
 import RadioSet from "./switchcheckpages/RadioSet";
-import DisplayByRadio from "./switchcheckpages/DisplayByRadio";
+// import DisplayByRadio from "./switchcheckpages/DisplayByRadio";
 import DisplayByRadioSwitch from "./switchcheckpages/DisplayByRadioSwitch";
+import FormHeader from "./switchcheckpages/FormHeader";
 
 /**
  * プッシュ型実装の試行とその困難さについて
@@ -50,7 +51,7 @@ const SwitchCheckPage = () => {
         <Box sx={{ display: "flex", flexDirection: "column", gap: 4, p: 2 }}>
             <h5>switch page test</h5>
 
-            <Box>
+            {/* <Box>
                 <h6>【DisplayByRadio】コンポーネントを複数配置し、それぞれにswitchContentIdを指定</h6>
                 <RadioSet radioGroupName="radio-set-1" defaultValue="1" />
                 <DisplayByRadio radioGroupName="radio-set-1" switchContentId="1">
@@ -62,7 +63,7 @@ const SwitchCheckPage = () => {
                 <DisplayByRadio radioGroupName="radio-set-1" switchContentId="3">
                     <div>ここはラジオボタンの値が3のときに表示されます</div>
                 </DisplayByRadio>
-            </Box>
+            </Box> */}
 
             <Box>
                 <h6>【DisplayByRadioSwitch】1つのコンポーネント内で複数の子要素を出し分け</h6>
@@ -73,6 +74,44 @@ const SwitchCheckPage = () => {
                     <div data-switch-content-id="4">ここはラジオボタンの値が3のときに表示されます</div>
                 </DisplayByRadioSwitch>
             </Box>
+
+            <FormHeader
+                disptitle="フォームタイトル"
+                functions={[
+                    {
+                        name: "登録",
+                        templateabledflag: true,
+                        switchPatterns: [{ switchid: "0001", target: "00SwitchPanel" }],
+                    },
+                    {
+                        name: "照会",
+                        templateabledflag: true,
+                        switchPatterns: [{ switchid: "0002", target: "00SwitchPanel" }],
+                    },
+                    {
+                        name: "修正",
+                        templateabledflag: true,
+                        switchPatterns: [{ switchid: "0003", target: "00SwitchPanel" }],
+                    },
+                    {
+                        name: "削除",
+                        templateabledflag: true,
+                        switchPatterns: [{ switchid: "0004", target: "00SwitchPanel" }],
+                    },
+                    {
+                        name: "キャンセル",
+                        templateabledflag: true,
+                        switchPatterns: [{ switchid: "0001", target: "none" }],
+                    }
+                ]}
+                dispid="JZE10111"
+            />
+            <DisplayByRadioSwitch radioGroupName="00SwitchPanel_JZE10111">
+                <div data-switch-content-id="0001">ここはラジオボタンの値が1のときに表示されます</div>
+                <div data-switch-content-id="0002">ここはラジオボタンの値が2のときに表示されます</div>
+                <div data-switch-content-id="0003">ここはラジオボタンの値が3のときに表示されます</div>
+                <div data-switch-content-id="0004">ここはラジオボタンの値が4のときに表示されます</div>
+            </DisplayByRadioSwitch>
         </Box>
     );
 };
